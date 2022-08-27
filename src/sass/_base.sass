@@ -1,0 +1,47 @@
+*
+  &::before,
+  &::after
+    box-sizing: border-box
+    list-style: none
+    text-decoration: none
+    margin: 0
+    padding: 0
+    color: color('text')
+
+  body
+    background: color('background')
+
+html
+  scroll-behavior: smooth
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6
+  color: color('text')
+  font-family: font-family('inter')
+
+h1,
+h2
+  font-size: 2rem
+  font-weight: 500
+
+p
+  opacity: 75%
+  font-size: 1rem
+  font-weight: 400
+
+ul
+  list-style: none
+  margin: 0
+
+a
+  color: unset
+
+  &:hover
+    color: unset
+
+section, footer
+  padding: 60px 0
