@@ -33,6 +33,7 @@
         "consistent-return": "off",
         "default-case": "off",
         "no-unused-vars": "off",
-        "no-restricted-globals": "off"
+        "no-restricted-globals": "off",
+        "no-useless-return": "off"
     }
 }
