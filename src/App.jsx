@@ -10,6 +10,28 @@ export const ACTIONS = {
     EVALUATE: 'evaluate',
 };
 
+function evaluate({ previousOperand, currentOperand, operation }) {
+    const prev = parseFloat(previousOperand);
+    const current = parseFloat(currentOperand);
+    if (isNaN(prev) || isNaN(current)) return '';
+    let computation = '';
+    switch (operation) {
+        case '+':
+            computation = prev + current;
+            break;
+        case '*':
+            computation = prev * current;
+            break;
+        case '/':
+            computation = prev / current;
+            break;
+        case '-':
+            computation = prev - current;
+            break;
+    }
+    return computation.toString();
+}
+
 function reducer(state, { type, payload }) {
     switch (type) {
         case ACTIONS.ADD_DIGIT:
@@ -24,29 +46,58 @@ function reducer(state, { type, payload }) {
                 currentOperand: `${state.currentOperand || ''}${payload.digit}`,
             };
         case ACTIONS.CHOOSE_OPERATION:
-            if (
-                state.currentOperand === null &&
-                state.previousOperand === null
-            ) {
-                return state;
-            }
-            if (state.previousOperand === null) {
+            if (state.currentOperand == null) {
                 return {
                     ...state,
-                    operation: payload.previousOperand,
+                    operation: payload.operation,
+                };
+            }
+
+            if (state.currentOperand == null && state.previousOperand == null) {
+                return state;
+            }
+
+            if (state.previousOperand == null) {
+                return {
+                    ...state,
+                    operation: payload.operation,
                     previousOperand: state.currentOperand,
                     currentOperand: null,
                 };
             }
-            break;
+
+            return {
+                ...state,
+                operation: payload.operation,
+                perviousOperand: evaluate(state),
+                currentOperand: null,
+            };
+
         case ACTIONS.CLEAR:
             return {};
+
+        case ACTIONS.EVALUATE:
+            if (
+                state.currentOperand == null ||
+                state.previousOperand == null ||
+                state.operation == null
+            ) {
+                return state;
+            }
+
+            return {
+                ...state,
+                operation: null,
+                previsouOperand: null,
+                currentOperand: evaluate(state),
+            };
     }
 }
 
 export default function App() {
     const [{ currentOperand, previousOperand, operation }, dispatch] =
         useReducer(reducer, {});
+
     return (
         <div className="calculator-grid">
             <div className="output">
@@ -77,7 +128,14 @@ export default function App() {
             <DigitButton digit="9" dispatch={dispatch} />
             <OperationButton operation="-" dispatch={dispatch} />
             <DigitButton digit="." dispatch={dispatch} />
-            <DigitButton className="large-btn" digit="0" dispatch={dispatch} />
+            <DigitButton digit="0" dispatch={dispatch} />
+            <button
+                className="large-btn"
+                type="button"
+                onClick={() => dispatch({ type: ACTIONS.EVALUATE })}
+            >
+                =
+            </button>
         </div>
     );
 }
