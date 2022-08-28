@@ -1,13 +1,6 @@
 # ReCalc
 
 <p align="center">
-<br>
-    <a href="https://img.shields.io/github/package-json/v/infinitedim/recalc"><img src="https://img.shields.io/github/package-json/v/infinitedim/recalc" alt="Version"></a>
-    <a href="https://github.com/infinitedim/infinitedim.my.id/issues"><img src="https://img.shields.io/github/issues/infinitedim/recalc" alt="GitHub issues"></a>
-    <a href="https://github.com/infinitedim/recalc/pulls"><img alt="GitHub pull requests" src="https://img.shields.io/github/issues-pr/infinitedim/recalc"></a>
-    <a href="https://github.com/infinitedim/recalc/blob/main/LICENSE"><img src="https://img.shields.io/github/license/infinitedim/recalc" alt="License"></a>
-</p>
-<p align="center">
 <a href="#">ReCalc</a> is Calculator App Using React JS.
 </p>
 
