@@ -8,8 +8,7 @@
         "plugin:react/recommended",
         "airbnb",
         "plugin:prettier/recommended",
-        "eslint:recommended",
-        "plugin:prettier/recommended"
+        "eslint:recommended"
     ],
     "overrides": [],
     "parserOptions": {
@@ -22,6 +21,18 @@
     "plugins": ["react"],
     "rules": {
         "react/react-in-jsx-scope": "off",
-        "quotes": "error"
+        "quotes": "error",
+        "prettier/prettier": [
+            "error",
+            {
+                "endOfLine": "auto"
+            }
+        ],
+        "react/prop-types": "off",
+        "import/no-cycle": "off",
+        "no-undef": "off",
+        "consistent-return": "off",
+        "default-case": "off"
+        // "no-fallthrough": "off"
     }
 }
