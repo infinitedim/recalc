@@ -1,6 +1,6 @@
 import { ACTIONS } from "../App";
 
-export default function DigitButton({ dispatch, digit }) {
+export default function DigitButton({ dispatch, digit }: any): JSX.Element {
   return (
     <button
       type="button"

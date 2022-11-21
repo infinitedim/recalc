@@ -2,7 +2,15 @@ import { useReducer } from "react";
 import DigitButton from "./components/DigitButton";
 import OperationButton from "./components/OperationButton";
 
-export const ACTIONS = {
+interface Actions {
+  ADD_DIGIT: string;
+  CHOOSE_OPERATION: string;
+  CLEAR: string;
+  DELETE_DIGIT: string;
+  EVALUATE: string;
+}
+
+export const ACTIONS: Actions = {
   ADD_DIGIT: "add-digit",
   CHOOSE_OPERATION: "choose-operation",
   CLEAR: "clear",
@@ -10,11 +18,11 @@ export const ACTIONS = {
   EVALUATE: "evaluate",
 };
 
-function evaluate({ previousOperand, currentOperand, operation }) {
-  const prev = parseFloat(previousOperand);
-  const current = parseFloat(currentOperand);
+function evaluate({ previousOperand, currentOperand, operation }: any): string {
+  const prev: number = parseFloat(previousOperand as any);
+  const current: number = parseFloat(currentOperand as any);
   if (isNaN(prev) || isNaN(current)) return "";
-  let computation = null;
+  let computation: number | null = null;
   switch (operation) {
     case "+":
       computation = prev + current;
@@ -29,10 +37,10 @@ function evaluate({ previousOperand, currentOperand, operation }) {
       computation = prev - current;
       break;
   }
-  return computation.toString();
+  return computation?.toString() as string;
 }
 
-function reducer(state, { type, payload }) {
+function reducer(state: any, { type, payload }: any): any {
   switch (type) {
     case ACTIONS.ADD_DIGIT:
       if (state.overwrite) {
@@ -128,18 +136,18 @@ function reducer(state, { type, payload }) {
   }
 }
 
-const INTEGER_FORMATTER = new Intl.NumberFormat("en-us", {
+const INTEGER_FORMATTER: Intl.NumberFormat = new Intl.NumberFormat("en-us", {
   maximumFractionDigits: 0,
 });
 
-function formatOperand(operand) {
+function formatOperand(operand: any): any | undefined {
   if (operand == null) return;
   const [integer, decimal] = operand.split(".");
   if (decimal == null) return INTEGER_FORMATTER.format(integer);
 }
 
-export default function App() {
-  const [{ currentOperand, previousOperand, operation }, dispatch] = useReducer(
+export default function App(): JSX.Element {
+  const [ { currentOperand, previousOperand, operation}: any, dispatch: any]: any = useReducer(
     reducer,
     {}
   );
