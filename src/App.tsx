@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import { useReducer, Dispatch } from "react";
 import DigitButton from "./components/DigitButton";
 import OperationButton from "./components/OperationButton";
 
@@ -19,10 +19,14 @@ export const ACTIONS: Actions = {
 };
 
 function evaluate({ previousOperand, currentOperand, operation }: any): string {
-  const prev: number = parseFloat(previousOperand as any);
-  const current: number = parseFloat(currentOperand as any);
-  if (isNaN(prev) || isNaN(current)) return "";
+  const prev: number = parseFloat(previousOperand as string);
+  const current: number = parseFloat(currentOperand as string);
   let computation: number | null = null;
+
+  if (isNaN(prev) || isNaN(current)) {
+    return "";
+  }
+
   switch (operation) {
     case "+":
       computation = prev + current;
@@ -147,10 +151,10 @@ function formatOperand(operand: any): any | undefined {
 }
 
 export default function App(): JSX.Element {
-  const [ { currentOperand, previousOperand, operation}: any, dispatch: any]: any = useReducer(
-    reducer,
-    {}
-  );
+  const [{ currentOperand, previousOperand, operation }, dispatch]: [
+    any,
+    Dispatch<any>,
+  ] = useReducer(reducer, {});
 
   return (
     <div className="calculator-grid">
@@ -173,21 +177,66 @@ export default function App(): JSX.Element {
       >
         DEL
       </button>
-      <OperationButton operation="+" dispatch={dispatch} />
-      <DigitButton digit="1" dispatch={dispatch} />
-      <DigitButton digit="2" dispatch={dispatch} />
-      <DigitButton digit="3" dispatch={dispatch} />
-      <OperationButton operation="*" dispatch={dispatch} />
-      <DigitButton digit="4" dispatch={dispatch} />
-      <DigitButton digit="5" dispatch={dispatch} />
-      <DigitButton digit="6" dispatch={dispatch} />
-      <OperationButton operation="/" dispatch={dispatch} />
-      <DigitButton digit="7" dispatch={dispatch} />
-      <DigitButton digit="8" dispatch={dispatch} />
-      <DigitButton digit="9" dispatch={dispatch} />
-      <OperationButton operation="-" dispatch={dispatch} />
-      <DigitButton digit="." dispatch={dispatch} />
-      <DigitButton digit="0" dispatch={dispatch} />
+      <OperationButton
+        operation="+"
+        dispatch={dispatch}
+      />
+      <DigitButton
+        digit="1"
+        dispatch={dispatch}
+      />
+      <DigitButton
+        digit="2"
+        dispatch={dispatch}
+      />
+      <DigitButton
+        digit="3"
+        dispatch={dispatch}
+      />
+      <OperationButton
+        operation="*"
+        dispatch={dispatch}
+      />
+      <DigitButton
+        digit="4"
+        dispatch={dispatch}
+      />
+      <DigitButton
+        digit="5"
+        dispatch={dispatch}
+      />
+      <DigitButton
+        digit="6"
+        dispatch={dispatch}
+      />
+      <OperationButton
+        operation="/"
+        dispatch={dispatch}
+      />
+      <DigitButton
+        digit="7"
+        dispatch={dispatch}
+      />
+      <DigitButton
+        digit="8"
+        dispatch={dispatch}
+      />
+      <DigitButton
+        digit="9"
+        dispatch={dispatch}
+      />
+      <OperationButton
+        operation="-"
+        dispatch={dispatch}
+      />
+      <DigitButton
+        digit="."
+        dispatch={dispatch}
+      />
+      <DigitButton
+        digit="0"
+        dispatch={dispatch}
+      />
       <button
         className="large-btn"
         type="button"
